@@ -41,6 +41,11 @@ dependencies:
   flutter_svg: ^2.0.10+1
   oauth2: ^2.0.2
   font_awesome_flutter: ^10.7.0
+  flutter_bloc: ^8.1.6
+  image_picker: ^1.1.2
+  carousel_slider: ^4.2.1
+  get: ^4.6.6
+  timeago: ^3.7.0
 
 dev_dependencies:
   flutter_test:
