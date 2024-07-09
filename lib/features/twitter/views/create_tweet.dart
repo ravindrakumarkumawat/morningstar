@@ -23,6 +23,10 @@ class _CreateTweetScreenState extends State<CreateTweetScreen> {
     _tweetTextController.dispose();
   }
 
+  void shareTweet() {
+    Navigator.pop(context);
+  }
+
   void onPickImages() async {
     images = await pickImages();
     setState(() {});

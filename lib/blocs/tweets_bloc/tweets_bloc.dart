@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:morningstar/blocs/tweets_bloc/tweets_event.dart';
 import 'package:morningstar/blocs/tweets_bloc/tweets_state.dart';
-import 'package:morningstar/repositories/twitter_repository.dart';
+import 'package:morningstar/data/repositories/twitter_repository.dart';
 
 class TweetsBloc extends Bloc<TweetsEvent, TweetsState> {
   final TwitterRepository twitterRepository;

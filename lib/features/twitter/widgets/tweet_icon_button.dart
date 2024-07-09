@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:morningstar/theme/pallete.dart';
+import 'package:morningstar/theme/typography.dart';
 
 class TweetIconButton extends StatelessWidget {
   final String pathName;
@@ -28,7 +29,7 @@ class TweetIconButton extends StatelessWidget {
             child: Text(
               text,
               style: const TextStyle(
-                fontSize: 16,
+                fontSize: AppTypography.fs16,
               ),
             ),
           ),

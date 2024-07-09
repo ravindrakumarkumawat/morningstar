@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:morningstar/models/tweet.dart';
+import 'package:morningstar/data/models/tweet.dart';
 
 abstract class TweetsState extends Equatable {
   const TweetsState();

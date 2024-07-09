@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:morningstar/theme/theme.dart';
 
 class CarouselImage extends StatefulWidget {
   final List<String> imageLinks;
@@ -51,14 +52,14 @@ class _CarouselImageState extends State<CarouselImage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: widget.imageLinks.asMap().entries.map((e) {
                 return Container(
-                  width: 12,
-                  height: 12,
+                  width: 8,
+                  height: 8,
                   margin: const EdgeInsets.symmetric(
-                    horizontal: 4,
+                    horizontal: 2,
                   ),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white.withOpacity(
+                    color: Pallete.blackColor.withOpacity(
                       _current == e.key ? 0.9 : 0.4,
                     ),
                   ),

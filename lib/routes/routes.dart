@@ -3,7 +3,7 @@ import 'package:get/route_manager.dart';
 import 'package:morningstar/features/Authentication/create_account.dart';
 import 'package:morningstar/features/accounts/accounts_list.dart';
 import 'package:morningstar/features/authentication/views/login.dart';
-import 'package:morningstar/features/dashboard/home_view.dart';
+import 'package:morningstar/features/home/home_view.dart';
 import 'package:morningstar/pages/splash.dart';
 
 // class Routes {

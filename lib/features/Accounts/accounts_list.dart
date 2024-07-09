@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:morningstar/common/tile/follow_tile.dart';
 import 'package:morningstar/constants/ui_constants.dart';
-import 'package:morningstar/features/dashboard/home_view.dart';
+import 'package:morningstar/features/home/home_view.dart';
 import 'package:morningstar/theme/theme.dart';
 import 'package:morningstar/theme/typography.dart';
 

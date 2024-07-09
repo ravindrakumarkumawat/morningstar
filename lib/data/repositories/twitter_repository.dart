@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:morningstar/models/tweet.dart';
+import 'package:morningstar/data/models/tweet.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 
 class TwitterRepository {
