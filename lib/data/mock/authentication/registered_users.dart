@@ -1,4 +1,4 @@
-[
+final List<Map<String, String>> registeredUsers = [
   {
     "id": "970655",
     "uid": "970655",
@@ -32,4 +32,4 @@
     "countryCode": "In",
     "password": "test123"
   }
-]
+];

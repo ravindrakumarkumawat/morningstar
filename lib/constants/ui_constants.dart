@@ -15,8 +15,6 @@ class UiConstants {
   static List<Widget> bottomTabBarPages = [
     TweetList(),
     Text('Search Screen'),
-    Text('Square Screen'),
-    Text('Group Screen'),
     Text('Notification Screen'),
     Text('Envelop Screen'),
   ];

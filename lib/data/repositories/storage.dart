@@ -1,33 +1,51 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+// import 'package:morningstar/model/link_media_info.dart';
+import 'dart:convert';
+// import 'package:morningstar/model/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Storage {
-  Storage._();
-  static final instance = Storage._();
+class SharedPreferenceHelper {
+  SharedPreferenceHelper._internal();
+  static final SharedPreferenceHelper _singleton =
+      SharedPreferenceHelper._internal();
 
-  saveToStorage(String key, String value) async {
-    const storage = FlutterSecureStorage();
-    return await storage.write(key: key, value: value);
+  factory SharedPreferenceHelper() {
+    return _singleton;
   }
 
-  getFromStorage(String key) async {
-    const storage = FlutterSecureStorage();
-    return await storage.read(key: key);
+  Future<String?> getUserName() async {
+    return (await SharedPreferences.getInstance())
+        .getString(UserPreferenceKey.UserName.toString());
   }
 
-  // Read all values
-  getAllFromStorage() async {
-    const storage = FlutterSecureStorage();
-    return await storage.readAll();
+  Future clearPreferenceValues() async {
+    (await SharedPreferences.getInstance()).clear();
   }
 
-  deleteKeyOfStorage(String key) async {
-    const storage = FlutterSecureStorage();
-    return await storage.delete(key: key);
-  }
+  // Future<bool> saveUserProfile(UserModel user) async {
+  //   return (await SharedPreferences.getInstance()).setString(
+  //       UserPreferenceKey.UserProfile.toString(), json.encode(user.toJson()));
+  // }
 
-  // Delete all
-  deleteAllKeysOfStorage() async {
-    const storage = FlutterSecureStorage();
-    return await storage.deleteAll();
-  }
+  // Future<UserModel?> getUserProfile() async {
+  //   final String? jsonString = (await SharedPreferences.getInstance())
+  //       .getString(UserPreferenceKey.UserProfile.toString());
+  //   if (jsonString == null) return null;
+  //   return UserModel.fromJson(json.decode(jsonString));
+  // }
+
+  // Future<bool> saveLinkMediaInfo(String key, LinkMediaInfo model) async {
+  //   return (await SharedPreferences.getInstance())
+  //       .setString(key, json.encode(model.toJson()));
+  // }
+
+  // Future<LinkMediaInfo?> getLinkMediaInfo(String key) async {
+  //   final String? jsonString =
+  //       (await SharedPreferences.getInstance()).getString(key);
+  //   if (jsonString == null) {
+  //     return null;
+  //   }
+  //   return LinkMediaInfo.fromJson(json.decode(jsonString));
+  // }
 }
+
+enum UserPreferenceKey { AccessToken, UserProfile, UserName, IsFirstTimeApp }

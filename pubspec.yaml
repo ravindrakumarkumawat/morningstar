@@ -48,7 +48,7 @@ dependencies:
   timeago: ^3.7.0
   any_link_preview: ^3.0.2
   like_button: ^2.0.5
-  flutter_secure_storage: ^9.2.2
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:

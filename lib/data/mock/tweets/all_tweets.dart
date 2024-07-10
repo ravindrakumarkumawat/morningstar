@@ -1,4 +1,4 @@
-[
+final List<Map<String, dynamic>> allTweets = [
   {
     "id": "1",
     "tweetedAt": "2024-07-01T12:34:56.000Z",
@@ -72,7 +72,8 @@
       "https://picsum.photos/200"
     ],
     "tweetType": "image",
-    "link": "www.medium.com/@newtargetinc/twitter-api-is-no-longer-free-now-what-2a57e157696f",
+    "link":
+        "www.medium.com/@newtargetinc/twitter-api-is-no-longer-free-now-what-2a57e157696f",
     "commentIds": ["10", "11", "12"],
     "reshareCount": 64,
     "likes": ["10", "11", "12"],
@@ -199,4 +200,4 @@
     "retweetedBy": "",
     "repliedTo": ""
   }
-]
+];

@@ -132,29 +132,15 @@ class _HomeViewState extends State<HomeView> {
           ),
           BottomNavigationBarItem(
             icon: FaIcon(
-              FontAwesomeIcons.square,
+              FontAwesomeIcons.bell,
               color: _page == 2 ? Pallete.blackColor : Pallete.greyColor,
               size: 24.0,
             ),
           ),
           BottomNavigationBarItem(
             icon: FaIcon(
-              FontAwesomeIcons.userGroup,
-              color: _page == 3 ? Pallete.blackColor : Pallete.greyColor,
-              size: 24.0,
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(
-              FontAwesomeIcons.bell,
-              color: _page == 4 ? Pallete.blackColor : Pallete.greyColor,
-              size: 24.0,
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(
               FontAwesomeIcons.envelope,
-              color: _page == 5 ? Pallete.blackColor : Pallete.greyColor,
+              color: _page == 3 ? Pallete.blackColor : Pallete.greyColor,
               size: 24.0,
             ),
           ),
