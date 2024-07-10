@@ -31,5 +31,16 @@ final List<Map<String, String>> registeredUsers = [
     "country": "India",
     "countryCode": "In",
     "password": "test123"
+  },
+  {
+    "id": "970650",
+    "uid": "970650",
+    "name": "Test account",
+    "username": "test99",
+    "email": "test@gmail.com",
+    "mobile": "7338767777",
+    "country": "India",
+    "countryCode": "In",
+    "password": "test@123"
   }
 ];

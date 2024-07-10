@@ -34,11 +34,12 @@ class Splash extends StatelessWidget {
               const SizedBox(
                 height: 150,
               ),
-              _googleLoginButton(context),
-              const SizedBox(
-                height: 10,
-              ),
-              _seperator(),
+              // TODO: Later will add
+              // _googleLoginButton(context),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              // _seperator(),
               const SizedBox(
                 height: 10,
               ),

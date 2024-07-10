@@ -7,6 +7,8 @@ import 'package:morningstar/routes/routes.dart';
 import 'package:morningstar/theme/theme.dart';
 import 'package:morningstar/theme/typography.dart';
 import 'package:morningstar/utils/utils.dart';
+import 'package:morningstar/data/models/authentication/login_model.dart';
+import 'package:morningstar/data/repositories/auth_repository.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -17,6 +19,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final TextEditingController textController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   String validateInput(String value) {
@@ -63,7 +66,8 @@ class _LoginState extends State<Login> {
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4),
                 child: Text(
-                  "To get started, first enter your phone, email, or @username",
+                  // "To get started, first enter your phone, email, or @username",
+                  "To get started, first enter your email",
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     color: Pallete.blackColor,
@@ -82,7 +86,8 @@ class _LoginState extends State<Login> {
                       child: TextFormField(
                         controller: textController,
                         decoration: InputDecoration(
-                          labelText: 'Enter Email, Phone, or Username',
+                          // labelText: 'Enter Email, Phone, or Username',
+                          labelText: 'Enter Email',
                           labelStyle: const TextStyle(
                             color: Pallete.blackColor,
                           ),
@@ -96,12 +101,13 @@ class _LoginState extends State<Login> {
                         // validator: validateInput,
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 16,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: PasswordField(),
+                      child: PasswordField(
+                          textEditingController: _passwordController),
                     )
                   ],
                 ),
@@ -151,21 +157,35 @@ class _LoginState extends State<Login> {
                           width: 1.0, color: Pallete.blueColor)),
                   shadowColor: Pallete.whiteColor,
                 ),
-                onPressed: () {
-                  // if (_formKey.currentState.validate()) {
-                  if (true) {
-                    // Valid input, proceed with your logic
-                    // ScaffoldMessenger.of(context).showSnackBar(
-                    //   const SnackBar(content: Text('Valid Input')),
-                    // );
-
-                    Navigator.pushNamed(
-                      context,
-                      home,
-                    );
+                onPressed: () async {
+                  final LoginModel payload = LoginModel(
+                    email: textController.value.text,
+                    password: _passwordController.value.text,
+                  );
+                  if(payload.email.isNotEmpty && payload.password.isNotEmpty) {
+                    // TODO: VALIDATION NEEDS TO BE HANDLED AROUND EMAIL AND PASSWORD
+                    await AuthRepository().login(payload);
+                    if (context.mounted) {
+                      Navigator.pushNamed(
+                        context,
+                        home,
+                      );
+                    }
                   } else {
-                    showSnackBar(context, 'Invalid Input');
+                    showSnackBar(context, 'Email or password should not be empty');
                   }
+                  
+                  // if (_formKey.currentState.validate()) {
+                  // if (true) {
+                  // Valid input, proceed with your logic
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //   const SnackBar(content: Text('Valid Input')),
+                  // );
+                  
+
+                  // } else {
+                  //   showSnackBar(context, 'Invalid Input');
+                  // }
                 },
                 child: const Text(
                   'Next',

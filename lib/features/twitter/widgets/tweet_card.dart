@@ -91,7 +91,8 @@ class TweetCard extends StatelessWidget {
                         ),
                         Text(
                           '${tweet["username"]} · ${timeago.format(
-                            DateTime.parse(tweet["tweetedAt"]), // Todo: Need to add fix for this
+                            DateTime.parse(tweet[
+                                "tweetedAt"]), // Todo: Need to add fix for this
                             locale: 'en_short',
                           )}',
                           // '${tweet["username"]} . ${tweet["tweetedAt"]}',

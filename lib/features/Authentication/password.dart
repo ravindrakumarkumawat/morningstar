@@ -3,18 +3,20 @@ import 'package:morningstar/constants/outline_input_border.dart';
 import 'package:morningstar/theme/pallete.dart';
 
 class PasswordField extends StatefulWidget {
+  PasswordField({super.key, required this.textEditingController});
+  final TextEditingController textEditingController;
   @override
   _PasswordFieldState createState() => _PasswordFieldState();
 }
 
 class _PasswordFieldState extends State<PasswordField> {
-  final TextEditingController _passwordController = TextEditingController();
+  // final TextEditingController _passwordController = TextEditingController();
   bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: _passwordController,
+      controller: widget.textEditingController,
       obscureText: _obscureText,
       decoration: InputDecoration(
         labelText: 'Password',
