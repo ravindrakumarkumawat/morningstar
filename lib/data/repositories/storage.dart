@@ -26,4 +26,21 @@ class SharedPreferenceRepository {
     final String? jsonString = prefs.getString(key);
     return jsonString;
   }
+
+  Future<void> saveToStorageAsBoolean(String key, bool value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool(key, value);
+  }
+  
+
+  Future<bool?> getFromStorageAsBoolean(String key) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool? booleanValue = prefs.getBool(key);
+    return booleanValue;
+  }
+
+  Future<void> clearStorage() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
 }

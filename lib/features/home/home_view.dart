@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:morningstar/constants/ui_constants.dart';
+import 'package:morningstar/data/repositories/auth_repository.dart';
 import 'package:morningstar/features/twitter/views/create_tweet.dart';
+import 'package:morningstar/routes/routes.dart';
 import 'package:morningstar/theme/pallete.dart';
 
 class HomeView extends StatefulWidget {
@@ -79,27 +81,42 @@ class _HomeViewState extends State<HomeView> {
               leading: Icon(Icons.home),
               title: Text('Profile'),
               onTap: () {
-                Navigator.pop(context);
+                // Navigator.pop(context);
               },
             ),
             ListTile(
               leading: Icon(Icons.settings),
               title: Text('Settings'),
               onTap: () {
-                Navigator.pop(context);
+                // Navigator.pop(context);
               },
             ),
             ListTile(
               leading: Icon(Icons.contact_mail),
               title: Text('Contact'),
               onTap: () {
-                Navigator.pop(context);
+                // Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: FaIcon(
+                FontAwesomeIcons.rightFromBracket,
+                color: Pallete.blackColor,
+              ),
+              title: Text('Logout'),
+              onTap: () async {
+                await AuthRepository().logout();
+                if (context.mounted) {
+                  Navigator.pushNamed(
+                    context,
+                    welcome,
+                  );
+                }
               },
             ),
           ],
         ),
       ),
-
       body: IndexedStack(
         index: _page,
         children: UiConstants.bottomTabBarPages,

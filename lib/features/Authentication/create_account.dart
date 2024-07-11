@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:morningstar/constants/outline_input_border.dart';
+import 'package:morningstar/data/models/authentication/register_model.dart';
+import 'package:morningstar/data/repositories/auth_repository.dart';
+import 'package:morningstar/features/authentication/password.dart';
+import 'package:morningstar/routes/routes.dart';
+import 'package:morningstar/theme/theme.dart';
 import 'package:morningstar/theme/typography.dart';
+import 'package:morningstar/utils/utils.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount({Key? key}) : super(key: key);
@@ -10,7 +17,10 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
-  final TextEditingController textController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   String validateInput(String value) {
@@ -35,12 +45,12 @@ class _CreateAccountState extends State<CreateAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Pallete.whiteColor,
       appBar: AppBar(
         title: const FaIcon(FontAwesomeIcons.xTwitter),
         // title: const Text('Morningstar'),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Pallete.whiteColor,
         leading: IconButton(
           icon: const FaIcon(
               FontAwesomeIcons.xmark), // Replace with your desired icon
@@ -65,8 +75,8 @@ class _CreateAccountState extends State<CreateAccount> {
                     "Create your account",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: Colors.black,
-                      fontSize: 28,
+                      color: Pallete.blackColor,
+                      fontSize: AppTypography.fs28,
                     ),
                     textAlign: TextAlign.start,
                   ),
@@ -81,44 +91,14 @@ class _CreateAccountState extends State<CreateAccount> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: TextFormField(
-                        controller: textController,
+                        controller: _nameController,
                         decoration: InputDecoration(
                           labelText: 'Name',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.blue,
-                              width: 2.0,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.black,
-                              width: 2.0,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.blue,
-                              width: 2.0,
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.red,
-                              width: 2.0,
-                            ),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.red,
-                              width: 2.0,
-                            ),
-                          ),
+                          border: BorderState.border,
+                          enabledBorder: BorderState.enabledBorder,
+                          focusedBorder: BorderState.focusedBorder,
+                          errorBorder: BorderState.errorBorder,
+                          focusedErrorBorder: BorderState.focusedErrorBorder,
                         ),
                         keyboardType: TextInputType.text,
                         // validator: validateInput,
@@ -130,45 +110,15 @@ class _CreateAccountState extends State<CreateAccount> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: TextFormField(
-                        controller: textController,
+                        controller: _usernameController,
                         decoration: InputDecoration(
-                          labelText: 'Enter Email, Phone, or Username',
+                          labelText: 'Enter username',
                           // hintText: 'Email, Phone, or Username',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.blue,
-                              width: 2.0,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.black,
-                              width: 2.0,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.blue,
-                              width: 2.0,
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.red,
-                              width: 2.0,
-                            ),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.red,
-                              width: 2.0,
-                            ),
-                          ),
+                          border: BorderState.border,
+                          enabledBorder: BorderState.enabledBorder,
+                          focusedBorder: BorderState.focusedBorder,
+                          errorBorder: BorderState.errorBorder,
+                          focusedErrorBorder: BorderState.focusedErrorBorder,
                         ),
                         keyboardType: TextInputType.text,
                         // validator: validateInput,
@@ -180,48 +130,27 @@ class _CreateAccountState extends State<CreateAccount> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: TextFormField(
-                        controller: textController,
+                        controller: _emailController,
                         decoration: InputDecoration(
-                          labelText: 'Date of birth',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.blue,
-                              width: 2.0,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.black,
-                              width: 2.0,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.blue,
-                              width: 2.0,
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.red,
-                              width: 2.0,
-                            ),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.red,
-                              width: 2.0,
-                            ),
-                          ),
+                          labelText: 'Enter email',
+                          // hintText: 'Email, Phone, or Username',
+                          border: BorderState.border,
+                          enabledBorder: BorderState.enabledBorder,
+                          focusedBorder: BorderState.focusedBorder,
+                          errorBorder: BorderState.errorBorder,
+                          focusedErrorBorder: BorderState.focusedErrorBorder,
                         ),
                         keyboardType: TextInputType.text,
                         // validator: validateInput,
                       ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: PasswordField(
+                          textEditingController: _passwordController),
                     ),
                     const SizedBox(
                       height: 16,
@@ -234,43 +163,66 @@ class _CreateAccountState extends State<CreateAccount> {
         ),
       ),
       bottomNavigationBar: Container(
-         decoration: const BoxDecoration(
-          border: Border(
-            top: BorderSide(color: Colors.grey)
-          )
-        ),
+        decoration: const BoxDecoration(
+            border: Border(top: BorderSide(color: Pallete.greyColor))),
         child: Padding(
-          padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0, bottom: 16.0),
+          padding: const EdgeInsets.only(
+              top: 16.0, left: 16.0, right: 16.0, bottom: 16.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
+                  backgroundColor: Pallete.blackColor,
                   padding: const EdgeInsets.all(8),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
-                      side: const BorderSide(width: 1.0, color: Colors.blueGrey)),
-                  shadowColor: Colors.white,
+                      side: const BorderSide(
+                          width: 1.0, color: Pallete.greyColor)),
+                  shadowColor: Pallete.whiteColor,
                 ),
-                onPressed: () {
-                  // if (_formKey.currentState.validate()) {
-                  if (true) {
-                    // Valid input, proceed with your logic
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Valid Input')),
-                    );
+                onPressed: () async {
+                  print(_nameController);
+                  print(_usernameController);
+                  print(_emailController);
+                  print(_passwordController);
+
+                  final RegisterModel payload = RegisterModel(
+                    name: _nameController.value.text,
+                    username: _usernameController.value.text,
+                    email: _emailController.value.text,
+                    password: _passwordController.value.text,
+                  );
+                  if (payload.email.isNotEmpty && payload.password.isNotEmpty) {
+                    // TODO: VALIDATION NEEDS TO BE HANDLED AROUND EMAIL AND PASSWORD
+                    await AuthRepository().authenticate(payload);
+                    if (context.mounted) {
+                      Navigator.pushNamed(
+                        context,
+                        home,
+                      );
+                    }
                   } else {
-                    // Invalid input
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Invalid Input')),
-                    );
+                    showSnackBar(
+                        context, 'Email or password should not be empty');
                   }
+                  // // if (_formKey.currentState.validate()) {
+                  // if (true) {
+                  //   // Valid input, proceed with your logic
+                  //   ScaffoldMessenger.of(context).showSnackBar(
+                  //     const SnackBar(content: Text('Valid Input')),
+                  //   );
+                  // } else {
+                  //   // Invalid input
+                  //   ScaffoldMessenger.of(context).showSnackBar(
+                  //     const SnackBar(content: Text('Invalid Input')),
+                  //   );
+                  // }
                 },
                 child: const Text(
                   'Next',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Pallete.whiteColor,
                     fontWeight: FontWeight.w600,
                     fontSize: AppTypography.fs16,
                   ),

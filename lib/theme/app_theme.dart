@@ -3,6 +3,10 @@ import 'package:morningstar/theme/pallete.dart';
 
 class AppTheme {
   static ThemeData theme = ThemeData(
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: Pallete.blackColor,
+      primary: Pallete.blackColor,
+    ),
     scaffoldBackgroundColor: Pallete.whiteColor,
     appBarTheme: const AppBarTheme(
       backgroundColor: Pallete.backgroundColor,
