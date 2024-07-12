@@ -5,7 +5,6 @@ import 'package:morningstar/data/models/authentication/register_list.dart';
 import 'package:morningstar/data/models/authentication/login_model.dart';
 import 'package:morningstar/data/mock/authentication/registered_users.dart';
 import 'package:morningstar/data/repositories/storage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
   Future<bool?> checkAuthStatus() async {
