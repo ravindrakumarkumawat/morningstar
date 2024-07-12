@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "217098805414",
+    "project_id": "morningstarr",
+    "storage_bucket": "morningstarr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:217098805414:android:7d491426e1d506d7775467",
+        "android_client_info": {
+          "package_name": "com.example.morningstar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlAyWxpCGvP5G5bHQBul3X_ziqJdKYYHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
