@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:morningstar/common/avatar/avatar_image.dart';
 import 'package:morningstar/constants/assets_constants.dart';
 import 'package:morningstar/features/twitter/views/twitter_reply_view.dart';
-// import 'package:morningstar/core/enums/tweet_type_enum.dart';
 import 'package:morningstar/features/twitter/widgets/carousel_image.dart';
 import 'package:morningstar/features/twitter/widgets/hashtag.dart';
 import 'package:morningstar/features/twitter/widgets/tweet_icon_button.dart';
@@ -108,7 +107,6 @@ class TweetCard extends StatelessWidget {
                     HashtagText(
                       text: tweet['text'],
                     ),
-                    // if (tweet['tweetType'] == TweetType.image)
                     if (tweet['tweetType'] == 'image' && tweet['imageLinks'].length > 0)
                       CarouselImage(imageLinks: tweet['imageLinks'].cast<String>()),
                     if (tweet['link'].isNotEmpty) ...[
@@ -126,14 +124,6 @@ class TweetCard extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          TweetIconButton(
-                            pathName: AssetsConstants.viewsIcon,
-                            text: (tweet['commentIds']?.length +
-                                    tweet['reshareCount'] +
-                                    tweet['likes']?.length)
-                                .toString(),
-                            onTap: () {},
-                          ),
                           TweetIconButton(
                             pathName: AssetsConstants.commentIcon,
                             text: (tweet['commentIds']?.length).toString(),

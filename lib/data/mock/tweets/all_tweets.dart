@@ -1,3 +1,5 @@
+// For the reference purpose for DB structuing for Firebase
+
 final List<Map<String, dynamic>> allTweets = [
   {
     "id": "1",

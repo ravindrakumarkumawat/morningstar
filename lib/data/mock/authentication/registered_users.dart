@@ -1,3 +1,5 @@
+// For the reference purpose for DB structuing for Firebase
+
 final List<Map<String, String>> registeredUsers = [
   {
     "id": "970655",
