@@ -2,7 +2,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:morningstar/data/models/tweets/tweets_model.dart';
+import 'package:morningstar/data/repositories/tweets_repository.dart';
 import 'package:morningstar/utils/utils.dart';
+import 'package:uuid/uuid.dart';
 
 class CreateTweetScreen extends StatefulWidget {
   static route() => MaterialPageRoute(
@@ -57,7 +60,35 @@ class _CreateTweetScreenState extends State<CreateTweetScreen> {
               ),
               shadowColor: Colors.white,
             ),
-            onPressed: () {},
+            onPressed: () async {
+              var uuid = Uuid();
+              String randomID = uuid.v4();
+
+              TweetModel tweetPayload = TweetModel(
+                id: randomID,
+                tweetedAt: DateTime.now().toIso8601String(),
+                avatar: "https://randomuser.me/api/portraits/women/3.jpg",
+                name: "Debolina watt",
+                username: "debolinawatt",
+                text: 'Learning Dart and Flutter. #coding',
+                imageLinks: [
+                  "https://picsum.photos/200",
+                  "https://picsum.photos/200",
+                  "https://picsum.photos/200",
+                  "https://picsum.photos/200"
+                ],
+                tweetType: 'image',
+                link:
+                    'www.medium.com/@newtargetinc/twitter-api-is-no-longer-free-now-what-2a57e157696f',
+                commentIds: ['10', '11', '12'],
+                reshareCount: 4,
+                likes: ['1', '2', '3'],
+                retweetedBy: '',
+                repliedTo: '',
+              );
+
+              await TwittesRepository().addTweet(tweetPayload);
+            },
             child: const Text(
               'Post',
               style: TextStyle(

@@ -90,7 +90,7 @@ class TweetCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '${tweet["username"]} · ${timeago.format(
+                          '@${tweet["username"]} · ${timeago.format(
                             DateTime.parse(tweet[
                                 "tweetedAt"]), // Todo: Need to add fix for this
                             locale: 'en_short',
@@ -110,7 +110,7 @@ class TweetCard extends StatelessWidget {
                     ),
                     // if (tweet['tweetType'] == TweetType.image)
                     if (tweet['tweetType'] == 'image')
-                      CarouselImage(imageLinks: tweet['imageLinks']),
+                      CarouselImage(imageLinks: tweet['imageLinks'].cast<String>()),
                     if (tweet['link'].isNotEmpty) ...[
                       const SizedBox(height: 4),
                       AnyLinkPreview(
