@@ -9,7 +9,10 @@ class TweetList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('tweets').snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('tweets')
+          .orderBy('tweetedAt', descending: true)
+          .snapshots(),
       builder: (context, tweetSnapshot) {
         if (tweetSnapshot.connectionState == ConnectionState.waiting) {
           return const Loader();

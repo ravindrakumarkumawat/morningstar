@@ -1,11 +1,13 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:morningstar/data/models/tweets/tweets_model.dart';
 import 'package:morningstar/data/repositories/tweets_repository.dart';
+import 'package:morningstar/routes/routes.dart';
 import 'package:morningstar/utils/utils.dart';
-import 'package:uuid/uuid.dart';
 
 class CreateTweetScreen extends StatefulWidget {
   static route() => MaterialPageRoute(
@@ -20,6 +22,7 @@ class CreateTweetScreen extends StatefulWidget {
 class _CreateTweetScreenState extends State<CreateTweetScreen> {
   TextEditingController _tweetTextController = TextEditingController();
   List<File> images = [];
+  List<String> uploadedImagesUrl = [];
   @override
   void dispose() {
     super.dispose();
@@ -32,7 +35,64 @@ class _CreateTweetScreenState extends State<CreateTweetScreen> {
 
   void onPickImages() async {
     images = await pickImages();
+
+    List<String> urls = [];
+    for (File _image in images) {
+      String url = await uploadImage(_image);
+      if (url.isNotEmpty) {
+        urls.add(url);
+      }
+    }
+    uploadedImagesUrl = urls;
     setState(() {});
+  }
+
+  Future<String> uploadImage(File image) async {
+    try {
+      String randomID = generateRandomId();
+      String fileName = 'images/$randomID.jpg';
+      Reference storageRef = FirebaseStorage.instance.ref().child(fileName);
+
+      UploadTask uploadTask = storageRef.putFile(image);
+      TaskSnapshot taskSnapshot = await uploadTask;
+
+      String downloadURL = await taskSnapshot.ref.getDownloadURL();
+      return downloadURL;
+    } catch (e) {
+      print('Error uploading image: $e');
+      return '';
+    }
+  }
+
+  Future<void> postTweet(BuildContext context) async {
+    String randomUserID = generateRandomId();
+
+    TweetModel tweetPayload = TweetModel(
+      id: randomUserID,
+      tweetedAt: DateTime.now().toIso8601String(),
+      avatar: "https://randomuser.me/api/portraits/women/3.jpg",
+      name: "Debolina watt",
+      username: "debolinawatt",
+      text: _tweetTextController.value.text,
+      imageLinks: uploadedImagesUrl,
+      tweetType: 'image',
+      // TODO: Link implementation yet to be handled
+      // link:
+      //     'www.medium.com/@newtargetinc/twitter-api-is-no-longer-free-now-what-2a57e157696f',
+      link: '',
+      commentIds: [],
+      reshareCount: 0,
+      likes: [],
+      retweetedBy: '',
+      repliedTo: '',
+    );
+
+    if (_tweetTextController.value.text.isNotEmpty) {
+      await TwittesRepository().addTweet(tweetPayload);
+      if(context.mounted) Navigator.pushNamed(context, home);
+    } else {
+      showSnackBar(context, 'Please create interesting post');
+    }
   }
 
   @override
@@ -60,34 +120,8 @@ class _CreateTweetScreenState extends State<CreateTweetScreen> {
               ),
               shadowColor: Colors.white,
             ),
-            onPressed: () async {
-              var uuid = Uuid();
-              String randomID = uuid.v4();
-
-              TweetModel tweetPayload = TweetModel(
-                id: randomID,
-                tweetedAt: DateTime.now().toIso8601String(),
-                avatar: "https://randomuser.me/api/portraits/women/3.jpg",
-                name: "Debolina watt",
-                username: "debolinawatt",
-                text: 'Learning Dart and Flutter. #coding',
-                imageLinks: [
-                  "https://picsum.photos/200",
-                  "https://picsum.photos/200",
-                  "https://picsum.photos/200",
-                  "https://picsum.photos/200"
-                ],
-                tweetType: 'image',
-                link:
-                    'www.medium.com/@newtargetinc/twitter-api-is-no-longer-free-now-what-2a57e157696f',
-                commentIds: ['10', '11', '12'],
-                reshareCount: 4,
-                likes: ['1', '2', '3'],
-                retweetedBy: '',
-                repliedTo: '',
-              );
-
-              await TwittesRepository().addTweet(tweetPayload);
+            onPressed: () {
+              postTweet(context);
             },
             child: const Text(
               'Post',

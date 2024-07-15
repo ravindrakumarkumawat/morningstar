@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -31,4 +32,9 @@ Future<File?> pickImage() async {
     return File(imageFile.path);
   }
   return null;
+}
+
+String generateRandomId() {
+  var uuid = const Uuid();
+  return uuid.v4();
 }

@@ -109,7 +109,7 @@ class TweetCard extends StatelessWidget {
                       text: tweet['text'],
                     ),
                     // if (tweet['tweetType'] == TweetType.image)
-                    if (tweet['tweetType'] == 'image')
+                    if (tweet['tweetType'] == 'image' && tweet['imageLinks'].length > 0)
                       CarouselImage(imageLinks: tweet['imageLinks'].cast<String>()),
                     if (tweet['link'].isNotEmpty) ...[
                       const SizedBox(height: 4),
