@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:morningstar/constants/outline_input_border.dart';
-import 'package:morningstar/features/accounts/accounts_list.dart';
 import 'package:morningstar/features/authentication/password.dart';
-import 'package:morningstar/routes/controller/auth_controller.dart';
-import 'package:morningstar/routes/routes.dart';
 import 'package:morningstar/theme/theme.dart';
 import 'package:morningstar/theme/typography.dart';
 import 'package:morningstar/utils/utils.dart';
@@ -22,9 +18,8 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final TextEditingController textController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final AuthController authController = Get.put(AuthController());
+  
   final _formKey = GlobalKey<FormState>();
-
   String validateInput(String value) {
     // if (value.isEmpty) {
     //   return 'Please enter a value';
@@ -168,15 +163,14 @@ class _LoginState extends State<Login> {
                   );
                   if (payload.email.isNotEmpty && payload.password.isNotEmpty) {
                     // TODO: VALIDATION NEEDS TO BE HANDLED AROUND EMAIL AND PASSWORD
-                    await AuthRepository().login(payload);
+                    await AuthRepository()
+                        .logInUserWithEmailAndPassword(payload, context);
                     // if (context.mounted) {
                     //   Navigator.pushNamed(
                     //     context,
                     //     home,
                     //   );
                     // }
-
-                    authController.loginController();
                   } else {
                     showSnackBar(
                         context, 'Email or password should not be empty');

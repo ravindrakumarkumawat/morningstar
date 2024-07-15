@@ -195,16 +195,12 @@ class _CreateAccountState extends State<CreateAccount> {
                   );
                   if (payload.email.isNotEmpty && payload.password.isNotEmpty) {
                     // TODO: VALIDATION NEEDS TO BE HANDLED AROUND EMAIL AND PASSWORD
-                    await AuthRepository().authenticate(payload);
-                    if (context.mounted) {
-                      Navigator.pushNamed(
-                        context,
-                        home,
-                      );
-                    }
+                    // await AuthRepository().authenticate(payload);
+                    await AuthRepository()
+                        .registerUserWithEmailAndPassword(payload, context);
                   } else {
                     showSnackBar(
-                        context, 'Email or password should not be empty');
+                        context, 'Email or password should not be empty',);
                   }
                   // // if (_formKey.currentState.validate()) {
                   // if (true) {
