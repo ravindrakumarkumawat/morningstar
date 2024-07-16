@@ -5,6 +5,7 @@ import 'package:morningstar/data_layer/data/repositories/auth_repository.dart';
 import 'package:morningstar/presentation_layer/features/home/home_view.dart';
 import 'package:morningstar/firebase_options.dart';
 import 'package:morningstar/presentation_layer/pages/splash.dart';
+import 'package:morningstar/presentation_layer/pages/welcome.dart';
 import 'package:morningstar/presentation_layer/routes/routes.dart';
 import 'package:morningstar/presentation_layer/theme/app_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,13 +51,13 @@ class AuthPage extends StatelessWidget {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         if (state is AuthInitial) {
-          return Splash();
+          return Welcome();
         } else if (state is AuthLoading) {
-          return Center(child: CircularProgressIndicator());
+          return Splash();
         } else if (state is AuthAuthenticated) {
           return HomeView();
         } else if (state is AuthUnauthenticated) {
-          return Splash();
+          return Welcome();
         } else if (state is AuthError) {
           return Center(child: Text(state.message));
         } else {

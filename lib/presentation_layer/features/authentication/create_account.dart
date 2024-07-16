@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:morningstar/business_layer/blocs/authentication/auth_bloc.dart';
+import 'package:morningstar/business_layer/blocs/authentication/auth_event.dart';
 import 'package:morningstar/constants/outline_input_border.dart';
 import 'package:morningstar/data_layer/data/models/authentication/register_model.dart';
-import 'package:morningstar/data_layer/data/repositories/auth_repository.dart';
 import 'package:morningstar/presentation_layer/features/authentication/password.dart';
 
 import 'package:morningstar/presentation_layer/theme/theme.dart';
@@ -32,8 +34,7 @@ class _CreateAccountState extends State<CreateAccount> {
         centerTitle: true,
         backgroundColor: Pallete.whiteColor,
         leading: IconButton(
-          icon: const FaIcon(
-              FontAwesomeIcons.xmark),
+          icon: const FaIcon(FontAwesomeIcons.xmark),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -161,11 +162,14 @@ class _CreateAccountState extends State<CreateAccount> {
                     password: _passwordController.value.text,
                   );
                   if (payload.email.isNotEmpty && payload.password.isNotEmpty) {
-                    await AuthRepository()
-                        .registerUserWithEmailAndPassword(payload, context);
+                    BlocProvider.of<AuthBloc>(context).add(
+                      RegisterUser(payload, context),
+                    );
                   } else {
                     showSnackBar(
-                        context, 'Email or password should not be empty',);
+                      context,
+                      'Email or password should not be empty',
+                    );
                   }
                 },
                 child: const Text(

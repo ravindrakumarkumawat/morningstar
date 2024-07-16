@@ -14,7 +14,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LogOutUser>(_onLogOutUser);
   }
 
-  Future<void> _onCheckAuthStatus(CheckAuthStatus event, Emitter<AuthState> emit) async {
+  Future<void> _onCheckAuthStatus(
+      CheckAuthStatus event, Emitter<AuthState> emit) async {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       emit(AuthAuthenticated());
@@ -23,10 +24,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onRegisterUser(RegisterUser event, Emitter<AuthState> emit) async {
+  Future<void> _onRegisterUser(
+      RegisterUser event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     try {
-      await authRepository.registerUserWithEmailAndPassword(event.payload, event.context);
+      await authRepository.registerUserWithEmailAndPassword(
+          event.payload, event.context);
       emit(AuthAuthenticated());
     } catch (e) {
       emit(AuthError(e.toString()));
@@ -36,7 +39,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onLogInUser(LogInUser event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     try {
-      await authRepository.logInUserWithEmailAndPassword(event.payload, event.context);
+      await authRepository.logInUserWithEmailAndPassword(
+          event.payload, event.context);
       emit(AuthAuthenticated());
     } catch (e) {
       emit(AuthError(e.toString()));

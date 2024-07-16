@@ -17,7 +17,7 @@ RoutePredicate homePage = ModalRoute.withName(home);
 var routes = [
   GetPage(
     name: welcome,
-    page: () => Splash(),
+    page: () => Welcome(),
   ),
   GetPage(
     name: login,

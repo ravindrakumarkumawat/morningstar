@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:morningstar/business_layer/blocs/authentication/auth_bloc.dart';
+import 'package:morningstar/business_layer/blocs/authentication/auth_event.dart';
 import 'package:morningstar/constants/outline_input_border.dart';
 import 'package:morningstar/data_layer/data/models/authentication/login_model.dart';
-import 'package:morningstar/data_layer/data/repositories/auth_repository.dart';
 import 'package:morningstar/presentation_layer/features/authentication/password.dart';
 import 'package:morningstar/presentation_layer/theme/theme.dart';
 import 'package:morningstar/presentation_layer/theme/typography.dart';
@@ -145,23 +147,13 @@ class _LoginState extends State<Login> {
                     password: _passwordController.value.text,
                   );
                   if (payload.email.isNotEmpty && payload.password.isNotEmpty) {
-                    await AuthRepository()
-                        .logInUserWithEmailAndPassword(payload, context);
+                    BlocProvider.of<AuthBloc>(context).add(
+                      LogInUser(payload, context),
+                    );
                   } else {
                     showSnackBar(
                         context, 'Email or password should not be empty');
                   }
-
-                  // if (_formKey.currentState.validate()) {
-                  // if (true) {
-                  // Valid input, proceed with your logic
-                  // ScaffoldMessenger.of(context).showSnackBar(
-                  //   const SnackBar(content: Text('Valid Input')),
-                  // );
-
-                  // } else {
-                  //   showSnackBar(context, 'Invalid Input');
-                  // }
                 },
                 child: const Text(
                   'Next',

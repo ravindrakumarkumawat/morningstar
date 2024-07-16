@@ -5,9 +5,9 @@ import 'package:morningstar/presentation_layer/theme/theme.dart';
 import 'package:morningstar/presentation_layer/theme/typography.dart';
 import 'package:morningstar/utils/utils.dart';
 
-class Splash extends StatelessWidget {
+class Welcome extends StatelessWidget {
   final appBar = UiConstants.appBar();
-  Splash({super.key});
+  Welcome({super.key});
 
   @override
   Widget build(BuildContext context) {
