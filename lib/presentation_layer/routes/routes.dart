@@ -4,7 +4,7 @@ import 'package:morningstar/presentation_layer/features/accounts/accounts_list.d
 import 'package:morningstar/presentation_layer/features/authentication/create_account.dart';
 import 'package:morningstar/presentation_layer/features/authentication/views/login.dart';
 import 'package:morningstar/presentation_layer/features/home/home_view.dart';
-import 'package:morningstar/presentation_layer/pages/splash.dart';
+import 'package:morningstar/presentation_layer/pages/welcome.dart';
 
 const String welcome = '/welcome';
 const String login = '/login';
