@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:morningstar/features/twitter/widgets/tweet_list.dart';
+import 'package:morningstar/presentation_layer/features/twitter/widgets/tweet_list.dart';
 
 class UiConstants {
   static AppBar appBar() {

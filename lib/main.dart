@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:morningstar/features/home/home_view.dart';
+import 'package:morningstar/presentation_layer/features/home/home_view.dart';
 import 'package:morningstar/firebase_options.dart';
-import 'package:morningstar/pages/splash.dart';
-import 'package:morningstar/routes/routes.dart';
-import 'package:morningstar/theme/app_theme.dart';
+import 'package:morningstar/presentation_layer/pages/splash.dart';
+import 'package:morningstar/presentation_layer/routes/routes.dart';
+import 'package:morningstar/presentation_layer/theme/app_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() async {

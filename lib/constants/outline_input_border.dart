@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:morningstar/theme/pallete.dart';
+import 'package:morningstar/presentation_layer/theme/pallete.dart';
 
 class BorderState {
   static InputBorder border = OutlineInputBorder(
