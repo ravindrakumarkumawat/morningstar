@@ -2,31 +2,25 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:morningstar/data/models/authentication/register_model.dart';
 import 'package:morningstar/data/models/authentication/login_model.dart';
+import 'package:morningstar/data/providers/auth_provider.dart';
 import 'package:morningstar/data/repositories/storage.dart';
 import 'package:morningstar/presentation/routes/routes.dart';
 import 'package:morningstar/presentation/utils/utils.dart';
 
 class AuthRepository {
-
   Future<void> logout() async {
     await SharedPreferenceRepository().clearStorage();
-    await FirebaseAuth.instance.signOut();
+    await FirebaseAuthProvider.instance.signOut();
   }
 
-  // Firebase Integration
   Future<void> registerUserWithEmailAndPassword(
     RegisterModel payload,
     BuildContext context,
   ) async {
     try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: payload.email,
-        password: payload.password,
-      );
-
-      await SharedPreferenceRepository()
-          .saveToStorageAsBoolean('isAuthenticated', true);
+      final credential = await FirebaseAuthProvider.instance
+          .registerUserWithEmailAndPassword(
+              email: payload.email, password: payload.password);
       print('register credential');
       print(credential);
       if (context.mounted) {
@@ -54,12 +48,11 @@ class AuthRepository {
     BuildContext context,
   ) async {
     try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      final credential =
+          FirebaseAuthProvider.instance.logInUserWithEmailAndPassword(
         email: payload.email,
         password: payload.password,
       );
-      await SharedPreferenceRepository()
-          .saveToStorageAsBoolean('isAuthenticated', true);
       print('login credential');
       print(credential);
       if (context.mounted) {
