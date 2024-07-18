@@ -12,4 +12,11 @@ class TweetsProvider {
   Future<DocumentReference<Map<String, dynamic>>> addTweet({required Map<String, dynamic> tweet}) async {
     return await FirebaseFirestore.instance.collection(collection).add(tweet);
   }
+
+   Future<Stream<QuerySnapshot<Object?>>> getAllTweetsStream() async {
+    return FirebaseFirestore.instance
+          .collection('tweets')
+          .orderBy('tweetedAt', descending: true)
+          .snapshots();
+  }
 }
