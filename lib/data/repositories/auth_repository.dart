@@ -49,7 +49,7 @@ class AuthRepository {
   ) async {
     try {
       final credential =
-          FirebaseAuthProvider.instance.logInUserWithEmailAndPassword(
+          await FirebaseAuthProvider.instance.logInUserWithEmailAndPassword(
         email: payload.email,
         password: payload.password,
       );
