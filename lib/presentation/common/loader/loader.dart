@@ -11,9 +11,8 @@ class Loader extends StatelessWidget {
   }
 }
 
-
-class LodingPage extends StatelessWidget {
-  const LodingPage({ super.key });
+class LoadingPage extends StatelessWidget {
+  const LoadingPage({super.key});
 
   @override
   Widget build(BuildContext context) {

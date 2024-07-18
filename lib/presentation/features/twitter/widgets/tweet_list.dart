@@ -14,7 +14,7 @@ class TweetList extends StatelessWidget {
     return BlocBuilder<TweetBloc, TweetState>(
       builder: (context, state) {
         if (state is TweetLoading) {
-          return Center(child: CircularProgressIndicator());
+          return Loader();
         } else if (state is TweetLoaded) {
           return StreamBuilder<QuerySnapshot>(
             stream: state.tweetStream,
