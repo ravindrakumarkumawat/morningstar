@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:morningstar/business_logic/blocs/tweets/tweets_bloc.dart';
 import 'package:morningstar/business_logic/blocs/tweets/tweets_event.dart';
+import 'package:morningstar/business_logic/blocs/users/users_bloc.dart';
 import 'package:morningstar/firebase_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,7 +19,7 @@ import 'package:morningstar/business_logic/blocs/authentication/auth_event.dart'
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => TweetBloc()..add(FetchTweets()),
+        ),
+        BlocProvider(
+          create: (context) => UsersBloc(),
         ),
       ],
       child: GetMaterialApp(

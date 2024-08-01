@@ -1,11 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:morningstar/business_logic/blocs/authentication/auth_bloc.dart';
+import 'package:morningstar/business_logic/blocs/authentication/auth_event.dart';
 import 'package:morningstar/presentation/constants/ui_constants.dart';
-import 'package:morningstar/data/repositories/auth_repository.dart';
+import 'package:morningstar/presentation/features/home/widget/custom_drawer_header.dart';
 import 'package:morningstar/presentation/features/twitter/views/create_tweet.dart';
 import 'package:morningstar/presentation/routes/routes.dart';
 import 'package:morningstar/presentation/theme/pallete.dart';
+import 'package:morningstar/presentation/theme/typography.dart';
 
 class HomeView extends StatefulWidget {
   static route() => MaterialPageRoute(builder: (context) => const HomeView());
@@ -62,50 +66,43 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
       drawer: Drawer(
+        backgroundColor: Pallete.whiteColor,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            DrawerHeader(
-              child: Text(
-                'Drawer Header',
+            const CustomDrawerHeader(),
+            ListTile(
+              leading: const Icon(
+                Icons.home,
+                color: Pallete.blackColor,
+              ),
+              title: const Text(
+                'Profile',
                 style: TextStyle(
+                  fontSize: AppTypography.fs16,
+                  fontWeight: FontWeight.bold,
                   color: Pallete.blackColor,
-                  fontSize: 24,
                 ),
               ),
-              decoration: BoxDecoration(
-                color: Pallete.whiteColor,
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Profile'),
               onTap: () {
-                // Navigator.pop(context);
+                Navigator.pushNamed(context, profilePage);
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
-              onTap: () {
-                // Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.contact_mail),
-              title: Text('Contact'),
-              onTap: () {
-                // Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: FaIcon(
+              leading: const FaIcon(
                 FontAwesomeIcons.rightFromBracket,
                 color: Pallete.blackColor,
               ),
-              title: Text('Logout'),
+              title: const Text(
+                'Logout',
+                style: TextStyle(
+                  fontSize: AppTypography.fs16,
+                  fontWeight: FontWeight.bold,
+                  color: Pallete.blackColor,
+                ),
+              ),
               onTap: () async {
-                await AuthRepository().logout();
+                BlocProvider.of<AuthBloc>(context).add(LogOutUser());
                 if (context.mounted) {
                   Navigator.pushNamed(
                     context,

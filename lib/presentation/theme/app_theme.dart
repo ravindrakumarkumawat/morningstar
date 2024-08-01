@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:morningstar/presentation/theme/pallete.dart';
 
 class AppTheme {
-  static ThemeData theme = ThemeData(
+  static ThemeData theme = ThemeData.light().copyWith(
     colorScheme: ColorScheme.fromSeed(
       seedColor: Pallete.blackColor,
       primary: Pallete.blackColor,

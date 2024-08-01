@@ -15,4 +15,7 @@ class AssetsConstants {
   static const String likeFilledIcon = '$_svgsPath/like_filled.svg';
   static const String viewsIcon = '$_svgsPath/views.svg';
   static const String verifiedIcon = '$_svgsPath/verified.svg';
+  static const String defaultProfilePic =
+      'https://randomuser.me/api/portraits/men/1.jpg';
+  static const String defaultProfileBanner = 'https://pbs.twimg.com/profile_banners/457684585/1510495215/1500x500';
 }

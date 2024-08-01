@@ -6,6 +6,7 @@ import 'package:morningstar/business_logic/blocs/authentication/auth_event.dart'
 import 'package:morningstar/presentation/constants/outline_input_border.dart';
 import 'package:morningstar/data/models/authentication/login_model.dart';
 import 'package:morningstar/presentation/features/authentication/password.dart';
+import 'package:morningstar/presentation/routes/routes.dart';
 import 'package:morningstar/presentation/theme/theme.dart';
 import 'package:morningstar/presentation/theme/typography.dart';
 import 'package:morningstar/presentation/utils/utils.dart';
@@ -118,7 +119,10 @@ class _LoginState extends State<Login> {
                   shadowColor: Pallete.whiteColor,
                 ),
                 onPressed: () {
-                  showSnackBar(context, noImplementation);
+                    Navigator.pushNamed(
+                      context,
+                      forgetPassword,
+                    );
                 },
                 child: const Text(
                   'Forgot password?',

@@ -18,9 +18,9 @@ class AuthPage extends StatelessWidget {
         if (state is AuthInitial) {
           return Welcome();
         } else if (state is AuthLoading) {
-          return Splash();
+          return const Splash();
         } else if (state is AuthAuthenticated) {
-          return HomeView();
+          return const HomeView();
         } else if (state is AuthUnauthenticated) {
           return Welcome();
         } else if (state is AuthError) {
