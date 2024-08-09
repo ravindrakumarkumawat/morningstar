@@ -11,6 +11,7 @@ import 'package:morningstar/presentation/constants/custom_widgets.dart';
 import 'package:morningstar/presentation/features/profile/widget/user_profile.dart';
 import 'package:morningstar/presentation/features/profile/widget/tab_painter.dart';
 import 'package:morningstar/presentation/features/twitter/views/create_tweet.dart';
+import 'package:morningstar/presentation/routes/routes.dart';
 import 'package:morningstar/presentation/theme/app_icon.dart';
 import 'package:morningstar/presentation/theme/styles/styles.dart';
 import 'package:morningstar/presentation/theme/theme.dart';
@@ -106,9 +107,10 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                             child: StreamBuilder<DocumentSnapshot>(
                                 stream: state.userStream,
                                 builder: (context, userSnapshot) {
-                                  if(userSnapshot.hasData) {
-                                  final userDocs = userSnapshot.data!.data() as Map<String, dynamic>;
-                                      return CacheImage(
+                                  if (userSnapshot.hasData) {
+                                    final userDocs = userSnapshot.data!.data()
+                                        as Map<String, dynamic>;
+                                    return CacheImage(
                                       path: userDocs['banner_url'],
                                       fit: BoxFit.fill,
                                     );
@@ -121,12 +123,11 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                           );
                         } else {
                           return Container(
-                            height: 160,
-                            padding: const EdgeInsets.only(
-                              top: 28,
-                            ),
-                            color: Pallete.blackColor
-                          );
+                              height: 160,
+                              padding: const EdgeInsets.only(
+                                top: 28,
+                              ),
+                              color: Pallete.blackColor);
                         }
                       },
                     ),
@@ -235,7 +236,9 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
           RippleButton(
             splashColor: Pallete.dodgeBlue_50.withAlpha(100),
             borderRadius: const BorderRadius.all(Radius.circular(60)),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, profileSetupPage);
+            },
             child: Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: 10,
@@ -250,7 +253,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
-                'Edit Profile',
+                'Edit profile',
                 style: TextStyle(
                   color: Colors.black87.withAlpha(180),
                   fontSize: 17,

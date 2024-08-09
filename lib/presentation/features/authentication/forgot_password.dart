@@ -84,6 +84,7 @@ class _ForgetPasswordPageState extends State<ForgetPassword> {
       width: MediaQuery.of(context).size.width,
       child: CustomFlatButton(
         label: "Submit",
+        color: Pallete.blackColor,
         onPressed: _submit,
         borderRadius: 8,
       ),
@@ -91,24 +92,23 @@ class _ForgetPasswordPageState extends State<ForgetPassword> {
   }
 
   Widget _label() {
-    return Container(
-        child: Column(
-      children: <Widget>[
-        customText('Forget Password',
-            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 15),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: customText(
-              'Enter your email address below to receive password reset instruction',
-              style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black54),
-              textAlign: TextAlign.center),
-        )
-      ],
-    ));
+    return Column(
+          children: <Widget>[
+    customText('Forget Password',
+        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+    const SizedBox(height: 15),
+    Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: customText(
+          'Enter your email address below to receive password reset instruction',
+          style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              color: Colors.black54),
+          textAlign: TextAlign.center),
+    )
+          ],
+        );
   }
 
   void _submit() {

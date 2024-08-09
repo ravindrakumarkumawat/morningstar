@@ -17,6 +17,12 @@ class UserLoadedState extends UsersState {
   const UserLoadedState(this.userStream);
 }
 
+class UserLoadedStateData extends UsersState {
+  final Map<String, dynamic>? userData;
+
+  const UserLoadedStateData(this.userData);
+}
+
 class UserErrorState extends UsersState {
   final String message;
 

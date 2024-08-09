@@ -40,7 +40,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (event.context.mounted) {
         Navigator.pushNamed(
           event.context,
-          home,
+          profilePictureUploadPage,
         );
       }
     } on FirebaseAuthException catch (e) {

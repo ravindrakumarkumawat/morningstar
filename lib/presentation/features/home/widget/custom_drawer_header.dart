@@ -7,28 +7,17 @@ import 'package:morningstar/presentation/theme/pallete.dart';
 import 'package:morningstar/presentation/theme/typography.dart';
 import 'package:morningstar/business_logic/blocs/users/users_bloc.dart';
 
-class CustomDrawerHeader extends StatefulWidget {
-  const CustomDrawerHeader({Key? key}) : super(key: key);
-
-  @override
-  State<CustomDrawerHeader> createState() => _CustomDrawerHeaderState();
-}
-
-class _CustomDrawerHeaderState extends State<CustomDrawerHeader> {
-  @override
-  void initState() {
-    super.initState();
-    getUserDetails();
-  }
-
-  void getUserDetails() {
-    BlocProvider.of<UsersBloc>(context).add(CurrentUserDetails());
-  }
+class CustomDrawerHeader extends StatelessWidget {
+  const CustomDrawerHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UsersBloc, UsersState>(
       builder: (context, state) {
+        if (state is UsersInitialState) {
+          context.read<UsersBloc>().add(CurrentUserDetails());
+          return const SizedBox(height: 220, child: Loader());
+        }
         if (state is UserLoadedState) {
           return SizedBox(
             height: 220,
@@ -37,10 +26,12 @@ class _CustomDrawerHeaderState extends State<CustomDrawerHeader> {
               builder: (context, userSnapshot) {
                 if (userSnapshot.connectionState == ConnectionState.waiting) {
                   return const Loader();
-                } else if (!userSnapshot.hasData || !userSnapshot.data!.exists) {
+                } else if (!userSnapshot.hasData ||
+                    !userSnapshot.data!.exists) {
                   return const Text('No data available');
                 } else {
-                  final userDocs = userSnapshot.data!.data() as Map<String, dynamic>;
+                  final userDocs =
+                      userSnapshot.data!.data() as Map<String, dynamic>;
                   return UserDrawerHeaderContent(userDocs: userDocs);
                 }
               },
@@ -57,7 +48,7 @@ class _CustomDrawerHeaderState extends State<CustomDrawerHeader> {
 class UserDrawerHeaderContent extends StatelessWidget {
   final Map<String, dynamic> userDocs;
 
-  const UserDrawerHeaderContent({Key? key, required this.userDocs}) : super(key: key);
+  const UserDrawerHeaderContent({super.key, required this.userDocs});
 
   @override
   Widget build(BuildContext context) {

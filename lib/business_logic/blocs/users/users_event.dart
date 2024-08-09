@@ -8,3 +8,5 @@ sealed class UsersEvent extends Equatable {
 }
 
 class CurrentUserDetails extends UsersEvent {}
+
+class CurrentUserDetailsData extends UsersEvent {}
