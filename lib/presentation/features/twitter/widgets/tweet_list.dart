@@ -11,11 +11,11 @@ class TweetList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TweetBloc, TweetState>(
+    return BlocBuilder<TweetsBloc, TweetsState>(
       builder: (context, state) {
-        if (state is TweetLoading) {
+        if (state is TweetsLoading) {
           return Loader();
-        } else if (state is TweetLoaded) {
+        } else if (state is TweetsLoaded) {
           return StreamBuilder<QuerySnapshot>(
             stream: state.tweetStream,
             builder: (context, tweetSnapshot) {
@@ -42,7 +42,7 @@ class TweetList extends StatelessWidget {
               }
             },
           );
-        } else if (state is TweetError) {
+        } else if (state is TweetsError) {
           return Center(child: Text('Error: ${state.error}'));
         } else {
           return Container();

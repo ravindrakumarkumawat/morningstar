@@ -9,16 +9,14 @@ class UsersProvider {
 
   final String collection = 'users';
 
+  DocumentReference<Map<String, dynamic>> getUserDocRef(String uuid) {
+    return FirebaseFirestore.instance.collection(collection).doc(uuid);
+  }
+
   Future<void> createUser({
     required String uuid,
     required Map<String, dynamic> user,
   }) async {
-    await FirebaseFirestore.instance.collection('users').doc(uuid).set(user);
-  }
-
-  Future<Stream<DocumentSnapshot<Map<String, dynamic>>>> getUser({
-    required String uuid
-  }) async {
-    return FirebaseFirestore.instance.collection(collection).doc(uuid).snapshots();
+    await getUserDocRef(uuid).set(user);
   }
 }

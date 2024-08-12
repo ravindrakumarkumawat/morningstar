@@ -1,20 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-abstract class TweetState {}
+abstract class TweetsState {}
 
-class TweetInitial extends TweetState {}
+class TweetsInitial extends TweetsState {}
 
-class TweetLoading extends TweetState {}
+class TweetsLoading extends TweetsState {}
 
-class TweetLoaded extends TweetState {
+class TweetsLoaded extends TweetsState {
   final Stream<QuerySnapshot<Object?>> tweetStream;
 
-  TweetLoaded(this.tweetStream);
+  TweetsLoaded(this.tweetStream);
 }
 
-class TweetError extends TweetState {
+class TweetsError extends TweetsState {
   final String error;
 
-  TweetError(this.error);
+  TweetsError(this.error);
 }
 

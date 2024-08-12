@@ -36,7 +36,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
   }
 
   void getUserDetails() {
-    BlocProvider.of<UsersBloc>(context).add(CurrentUserDetails());
+    BlocProvider.of<UsersBloc>(context).add(UsersCurrentDetailsEvent());
   }
 
   @override

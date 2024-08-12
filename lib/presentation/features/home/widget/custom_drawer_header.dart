@@ -14,8 +14,10 @@ class CustomDrawerHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<UsersBloc, UsersState>(
       builder: (context, state) {
+        print('Ravindra');
+        print(state);
         if (state is UsersInitialState) {
-          context.read<UsersBloc>().add(CurrentUserDetails());
+          context.read<UsersBloc>().add(UsersCurrentDetailsEvent());
           return const SizedBox(height: 220, child: Loader());
         }
         if (state is UserLoadedState) {

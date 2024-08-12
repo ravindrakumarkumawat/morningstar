@@ -7,6 +7,6 @@ sealed class UsersEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class CurrentUserDetails extends UsersEvent {}
+class UsersCurrentDetailsEvent extends UsersEvent {}
 
-class CurrentUserDetailsData extends UsersEvent {}
+class UsersCurrentDetailsDataEvent extends UsersEvent {}

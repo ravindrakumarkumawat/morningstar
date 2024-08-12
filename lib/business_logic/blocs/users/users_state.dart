@@ -11,6 +11,8 @@ final class UsersInitialState extends UsersState {}
 
 class UserLoadingState extends UsersState {}
 
+class UserLoadingStateData extends UsersState {}
+
 class UserLoadedState extends UsersState {
   final Stream<DocumentSnapshot<Map<String, dynamic>>> userStream;
 

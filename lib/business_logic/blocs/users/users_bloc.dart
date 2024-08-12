@@ -11,12 +11,12 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
   final UsersRepository userRepository = UsersRepository();
 
   UsersBloc() : super(UsersInitialState()) {
-    on<CurrentUserDetails>(_getUserDetailStream);
-    on<CurrentUserDetailsData>(_getUserDetail);
+    on<UsersCurrentDetailsEvent>(_getUserDetailStream);
+    on<UsersCurrentDetailsDataEvent>(_getUserDetail);
   }
 
   Future<void> _getUserDetailStream(
-    CurrentUserDetails event,
+    UsersCurrentDetailsEvent event,
     Emitter<UsersState> emit,
   ) async {
     emit(UserLoadingState());
@@ -24,7 +24,8 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
       final User? user = FirebaseAuth.instance.currentUser;
       print('----current user----');
       print(user);
-      final userStream = await userRepository.getUserByIdStream(uuid: user!.uid);
+      final userStream =
+          await userRepository.getUserByIdStream(uuid: user!.uid);
       print('----current user stream----');
       print(userStream);
       print('----current user stream close----');
@@ -35,31 +36,31 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
   }
 
   Future<void> _getUserDetail(
-    CurrentUserDetailsData event,
+    UsersCurrentDetailsDataEvent event,
     Emitter<UsersState> emit,
   ) async {
-  emit(UserLoadingState());
-  try {
-    final User? user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      throw Exception('User not logged in');
-    }
-    
-    print('----current user----');
-    print(user);
+    emit(UserLoadingStateData());
+    try {
+      final User? user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        throw Exception('User not logged in');
+      }
 
-    final userDocument = await userRepository.getUserById(uuid: user.uid);
-    if (userDocument.exists) {
-      final userData = userDocument.data();
-      print('----current user data----');
-      print(userData);
+      print('----current user----');
+      print(user);
 
-      emit(UserLoadedStateData(userData));
-    } else {
-      throw Exception('User not found');
+      final userDocument = await userRepository.getUserById(uuid: user.uid);
+      if (userDocument.exists) {
+        final userData = userDocument.data();
+        print('----current user data----');
+        print(userData);
+
+        emit(UserLoadedStateData(userData));
+      } else {
+        throw Exception('User not found');
+      }
+    } catch (e) {
+      emit(UserErrorState(e.toString()));
     }
-  } catch (e) {
-    emit(UserErrorState(e.toString()));
   }
-}
 }

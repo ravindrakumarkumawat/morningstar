@@ -1,3 +1,3 @@
-abstract class TweetEvent {}
+abstract class TweetsEvent {}
 
-class FetchTweets extends TweetEvent {}
+class FetchTweets extends TweetsEvent {}

@@ -8,8 +8,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:morningstar/business_logic/blocs/users/users_bloc.dart';
 import 'package:morningstar/data/models/tweets/tweets_model.dart';
 import 'package:morningstar/data/repositories/tweets_repository.dart';
-import 'package:morningstar/presentation/common/loader/loader.dart';
-import 'package:morningstar/presentation/routes/routes.dart';
 import 'package:morningstar/presentation/utils/utils.dart';
 
 class CreateTweetScreen extends StatefulWidget {
@@ -26,7 +24,6 @@ class _CreateTweetScreenState extends State<CreateTweetScreen> {
   final TextEditingController _tweetTextController = TextEditingController();
   List<File> images = [];
   List<String> uploadedImagesUrl = [];
-  bool isLoading = false;
 
   @override
   void initState() {
@@ -35,7 +32,7 @@ class _CreateTweetScreenState extends State<CreateTweetScreen> {
   }
 
   void getUserDetails() {
-    BlocProvider.of<UsersBloc>(context).add(CurrentUserDetailsData());
+    BlocProvider.of<UsersBloc>(context).add(UsersCurrentDetailsDataEvent());
   }
 
   @override
@@ -47,10 +44,6 @@ class _CreateTweetScreenState extends State<CreateTweetScreen> {
   Future<void> onPickImages() async {
     images = await pickImages();
 
-    setState(() {
-      isLoading = true;
-    });
-
     List<String> urls = [];
     for (File _image in images) {
       String url = await uploadImage(_image);
@@ -60,7 +53,6 @@ class _CreateTweetScreenState extends State<CreateTweetScreen> {
     }
     setState(() {
       uploadedImagesUrl = urls;
-      isLoading = false;
     });
   }
 
@@ -87,10 +79,6 @@ class _CreateTweetScreenState extends State<CreateTweetScreen> {
       return;
     }
 
-    setState(() {
-      isLoading = true;
-    });
-
     final state = BlocProvider.of<UsersBloc>(context).state;
 
     if (state is UserLoadedStateData) {
@@ -104,10 +92,6 @@ class _CreateTweetScreenState extends State<CreateTweetScreen> {
       final errorMessage = state.message;
       showSnackBar(context, errorMessage);
     }
-
-    setState(() {
-      isLoading = false;
-    });
   }
 
   Future<void> submit(
@@ -132,7 +116,7 @@ class _CreateTweetScreenState extends State<CreateTweetScreen> {
     );
 
     await TwittesRepository().addTweet(tweetPayload);
-    if (context.mounted) Navigator.pushNamed(context, home);
+    if (context.mounted) Navigator.pop(context);
   }
 
   @override
@@ -140,7 +124,7 @@ class _CreateTweetScreenState extends State<CreateTweetScreen> {
     return Scaffold(
       appBar: _buildAppBar(),
       body: SafeArea(
-        child: isLoading ? const Loader() : _buildContent(),
+        child: _buildContent(),
       ),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );

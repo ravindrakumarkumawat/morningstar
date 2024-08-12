@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthBloc()..add(CheckAuthStatus()),
         ),
         BlocProvider(
-          create: (context) => TweetBloc()..add(FetchTweets()),
+          create: (context) => TweetsBloc()..add(FetchTweets()),
         ),
         BlocProvider(
           create: (context) => UsersBloc(),
